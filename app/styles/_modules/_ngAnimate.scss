@@ -1,0 +1,37 @@
+
+.box {
+    background: purple;
+    margin: 30px;
+    width: 80px;
+    height: 80px;
+    color: #fff;
+    padding: 10px;
+    -webkit-transition: 2s;
+    -moz-transition: 2s;
+    -ms-transition: 2s;
+    -o-transition: 2s;
+    transition: 2s;
+}
+
+.animate-if {
+  -webkit-transition: .2s;
+  -moz-transition: .2s;
+  -ms-transition: .2s;
+  -o-transition: .2s;
+  transition: .2s;
+}
+
+.animate-if.ng-enter {
+    opacity: 0;
+    transform: translate3d(0, -50%, 0);
+}
+.animate-if.ng-enter.ng-enter-active,
+.animate-if.ng-leave {
+    opacity: 1;
+    transform: translate3d(0, 0%, 0);
+}
+
+.animate-if.ng-leave.ng-leave-active {
+    opacity: 0;
+    transform: translate3d(0, -50%, 0);
+}

@@ -1,0 +1,18 @@
+.navbar-fixed-top {
+  .nav {
+    padding: 0 15px;
+  }
+
+  .navbar-brand {
+    padding: 0 15px;
+    img { margin: 5px; }
+  }
+}
+
+
+@media(min-width:768px) {
+  // Required padding for .navbar-fixed-top. Change if height of navigation changes.
+  body {
+    padding-top: 100px;
+  }
+}

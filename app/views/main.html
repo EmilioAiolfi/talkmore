@@ -1,0 +1,42 @@
+<section class="wrapper">
+  <form id="frm-plan" name="frmPlan" class="frm-plan" novalidate>
+
+    <div class="row row-centered">
+      <div class="col-fixed col-centered">
+        <div class="form-group align-center">
+          <label for="origin">Origem</label>
+          <input type="text" id="origin" class="form-control align-center frm-plan__input_readonly" placeholder="DDD" name="txt-ddd-origin" ng-pattern="onlyNumbers" ng-model="ddd.origin" required ng-click="open($event)" readonly="true">
+        </div>
+      </div>
+      <div class="col-fixed col-centered">
+        <div class="form-group align-center">
+          <label for="destiny">Destino</label>
+          <input type="text" id="destiny" class="form-control align-center frm-plan__input_readonly" placeholder="DDD" name="txt-ddd-destiny" ng-pattern="onlyNumbers" ng-model="ddd.destiny" required ng-click="open($event)" readonly="true">
+        </div>
+      </div>
+      <div class="col-fixed col-centered text-center">
+        <div class="form-group align-center">
+          <label for="time">Minutos</label>
+          <input type="text" id="time" class="form-control align-center" placeholder="MM" name="txt-time" ng-pattern="onlyNumbers" ng-model="time" ng-model-options="{debounce: {'default': 100, 'blur': 0}}" ng-change="changeMinutes()" required>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  <ul id="list-plans" class="list-inline list-blocks align-center">
+
+    <li class="list-blocks__content" ng-repeat="plan in listPlans">
+      <div class="list-blocks__header purple white">
+        <h1 class="list-blocks__title">{{ plan.plan }}</h1>
+        <div class="list-blocks__not-plan" ng-if="notPlan == true">
+          <span class="glyphicon glyphicon glyphicon-minus"></span>
+        </div>
+        <div ng-if="notPlan == false" class="list-blocks__rect animate-if">
+          <span class="list-blocks__currency">R$ </span>
+          <span class="list-blocks__price">{{ plan.price }}</span>
+        </div>
+      </div>
+    </li>
+
+</section>
