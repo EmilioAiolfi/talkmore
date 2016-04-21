@@ -113,6 +113,20 @@ module.exports = function (grunt) {
       }
     },
 
+    // Lint our coffee files
+    // Linting is unobtrusive. If linting errors happen then they wont break the process
+
+    coffeelint: {
+      options: {
+        force: true,  // Display lint errors as warnings. Do not break.
+        configFile: 'coffeelint.json'
+      },
+      files: [
+        'test/**/*.coffee',
+        'src/**/*.coffee'
+      ]
+    },
+
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
       options: {
@@ -423,6 +437,7 @@ module.exports = function (grunt) {
       server: [
         'sass:server',
         'coffee:dist',
+        'coffeelint',
         'copy:styles',
         'copy:fonts'
       ],
