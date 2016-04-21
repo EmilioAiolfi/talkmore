@@ -18,7 +18,7 @@ describe 'Tests for Controllers', ->
   template = undefined
 
   # Mocks
-  apiPlansMock = [{ plan: 'FaleMais 30', time: '30' }]
+  apiPlansMock = [{ plan: 'Talkmore 30', time: '30' }]
   apiPricingMock = { origin: '011', destiny: '016', price: '1.90' }
   apiDetailsMock = { ddd: '011', city: 'São Paulo'}
 
@@ -30,52 +30,53 @@ describe 'Tests for Controllers', ->
       $provide.value('apiDetails', apiDetailsMock )
       null
 
-    inject ($controller, $rootScope, _$httpBackend_, $compile, $templateCache, _$uibModal_, _Restangular_, _apiFactory_, _apiPlans_, _apiPricing_, _apiDetails_) ->
-      # Don't bother injecting a 'real' modal
-      $httpBackend = _$httpBackend_
-      scope = $rootScope.$new()
-      $uibModal = _$uibModal_
-      Restangular = _Restangular_
-      baseUrl = Restangular.configuration.baseUrl
-      apiFactory = _apiFactory_
-      apiPlans = _apiPlans_
-      apiPricing = _apiPricing_
-      apiDetails = _apiDetails_
+    inject ($controller, $rootScope, _$httpBackend_, $compile, $templateCache, _$uibModal_, _Restangular_,
+      _apiFactory_, _apiPlans_, _apiPricing_, _apiDetails_) ->
+        # Don't bother injecting a 'real' modal
+        $httpBackend = _$httpBackend_
+        scope = $rootScope.$new()
+        $uibModal = _$uibModal_
+        Restangular = _Restangular_
+        baseUrl = Restangular.configuration.baseUrl
+        apiFactory = _apiFactory_
+        apiPlans = _apiPlans_
+        apiPricing = _apiPricing_
+        apiDetails = _apiDetails_
 
-      modalInstance =
-        close: jasmine.createSpy('modalInstance.close')
-        dismiss: jasmine.createSpy('modalInstance.dismiss')
-        result: then: jasmine.createSpy('modalInstance.result.then')
-
-
-      spyOn($uibModal, 'open').and.returnValue(modalInstance)
-
-      MainCtrl = $controller('MainCtrl',
-        $httpBackend: $httpBackend
-        $scope: scope
-      )
-
-      ModalCtrl = $controller('ModalInstanceCtrl',
-        $scope: scope
-        $uibModalInstance: modalInstance
-        details: apiDetails
-      )
-
-      scope.APIplans = apiPlans
-      scope.APIpricing = apiPricing
-      scope.APIdetails = apiDetails
-      scope.listPlans = scope.APIplans
-      scope.APIplans.push
-        plan: 'Normal'
-        price: '0'
+        modalInstance =
+          close: jasmine.createSpy('modalInstance.close')
+          dismiss: jasmine.createSpy('modalInstance.dismiss')
+          result: then: jasmine.createSpy('modalInstance.result.then')
 
 
-      templateHtml = $templateCache.get 'app/views/main.html'
-      template = angular.element('<div>' + templateHtml + '</div>')
-      $compile(template)(scope)
+        spyOn($uibModal, 'open').and.returnValue(modalInstance)
 
-      form = scope.frmPlan
-      scope.$digest()
+        MainCtrl = $controller('MainCtrl',
+          $httpBackend: $httpBackend
+          $scope: scope
+        )
+
+        ModalCtrl = $controller('ModalInstanceCtrl',
+          $scope: scope
+          $uibModalInstance: modalInstance
+          details: apiDetails
+        )
+
+        scope.APIplans = apiPlans
+        scope.APIpricing = apiPricing
+        scope.APIdetails = apiDetails
+        scope.listPlans = scope.APIplans
+        scope.APIplans.push
+          plan: 'Normal'
+          price: '0'
+
+
+        templateHtml = $templateCache.get 'app/views/main.html'
+        template = angular.element('<div>' + templateHtml + '</div>')
+        $compile(template)(scope)
+
+        form = scope.frmPlan
+        scope.$digest()
 
   describe 'Controller: MainCtrl', ->
 
@@ -97,7 +98,7 @@ describe 'Tests for Controllers', ->
 
     describe 'Tests functions to calculates price', ->
 
-      it 'should have function calculate the minute price of FaleMais 30 with increased 10% on the amount', ->
+      it 'should have function calculate the minute price of Talkmore 30 with increased 10% on the amount', ->
         expect(scope.calcIncreasePrice).toBeDefined()
         expect(scope.calcIncreasePrice(scope.APIplans[0].time, scope.APIpricing.price, '100')).toBe('146,30')
 
@@ -123,13 +124,13 @@ describe 'Tests for Controllers', ->
         expect(form['txt-ddd-origin'].$valid).toBeFalsy()
         expect(form['txt-ddd-destiny'].$valid).toBeFalsy()
         expect(form['txt-time'].$valid).toBeFalsy()
-        expect(form.$valid).toBeFalsy();
+        expect(form.$valid).toBeFalsy()
 
 
       it 'should be invalid when given bad input', ->
         form['txt-time'] = 'Not a number'
-        expect(form['txt-time'].$valid).toBeFalsy();
-        expect(form.$valid).toBeFalsy();
+        expect(form['txt-time'].$valid).toBeFalsy()
+        expect(form.$valid).toBeFalsy()
 
 
   describe 'Tests for modal', ->
@@ -149,8 +150,8 @@ describe 'Tests for Controllers', ->
       expect(scope.cancel).toBeDefined()
 
     it 'should have called the modal dismiss function', ->
-        scope.cancel()
-        expect(modalInstance.dismiss).toHaveBeenCalled()
+      scope.cancel()
+      expect(modalInstance.dismiss).toHaveBeenCalled()
 
 
     it 'should have called the modal result function', ->

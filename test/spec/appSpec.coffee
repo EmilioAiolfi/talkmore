@@ -90,7 +90,7 @@ describe 'App Config Phase:', ->
         inject()
 
       it 'should call setBaseUrl.', ->
-        expect(RestangularProvider.setBaseUrl).toHaveBeenCalledWith 'http://private-fe2a-talkmore.apiary-mock.com/'
+        expect(RestangularProvider.setBaseUrl).toHaveBeenCalledWith 'http://private-36747-talkmore.apiary-mock.com/'
 
 
   describe 'Testing States', ->
@@ -106,7 +106,7 @@ describe 'App Config Phase:', ->
         rootScope = $rootScope
         state = $state
         location = $location
-        $templateCache.put('views/404.html', '404 - Not Found');
+        $templateCache.put('views/404.html', '404 - Not Found')
       )
 
       it 'should respond home state', ->
@@ -118,7 +118,7 @@ describe 'App Config Phase:', ->
 
       it 'redirects to otherwise page after locationChangeSuccess', ->
         location.path '/nonExistentPath'
-        rootScope.$digest();
+        rootScope.$digest()
         expect(location.path()).toBe '/404'
 
 
@@ -152,9 +152,9 @@ describe 'App Config Phase:', ->
 
         $templateCache.put 'views/main.html', 'HTML Home'
 
-        $httpBackend.whenGET(baseUrl + '/plans').respond({ plan: 'FaleMais 30', time: '30' });
-        $httpBackend.whenGET(baseUrl + '/ddd/pricing').respond({ origin: '011', destiny: '016', price: '1.90' });
-        $httpBackend.whenGET(baseUrl + '/ddd/details').respond({ ddd: '011', city: 'São Paulo' });
+        $httpBackend.whenGET(baseUrl + '/plans').respond({ plan: 'Talkmore 30', time: '30' })
+        $httpBackend.whenGET(baseUrl + '/ddd/prices').respond({ origin: '011', destiny: '016', price: '1.90' })
+        $httpBackend.whenGET(baseUrl + '/ddd/details').respond({ ddd: '011', city: 'São Paulo' })
 
       )
 
@@ -170,7 +170,7 @@ describe 'App Config Phase:', ->
         expect($state.current.name).toBe state
 
         $injector.invoke($state.current.resolve.apiPlans).then((res) ->
-          expect(res.plan).toEqual 'FaleMais 30'
+          expect(res.plan).toEqual 'Talkmore 30'
           expect(res.time).toEqual '30'
         )
 

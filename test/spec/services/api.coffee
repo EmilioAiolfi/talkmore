@@ -20,7 +20,7 @@ describe 'Services', ->
 
     mockPlans = [
       {
-        plan: 'FaleMais 30'
+        plan: 'Talkmore 30'
         time: '30'
       }
     ]
@@ -41,9 +41,9 @@ describe 'Services', ->
     ]
 
 
-    $httpBackend.whenGET(baseUrl + '/plans').respond(mockPlans);
-    $httpBackend.whenGET(baseUrl + '/ddd/pricing').respond(mockPricing);
-    $httpBackend.whenGET(baseUrl + '/ddd/details').respond(mockDetails);
+    $httpBackend.whenGET(baseUrl + '/plans').respond(mockPlans)
+    $httpBackend.whenGET(baseUrl + '/ddd/prices').respond(mockPricing)
+    $httpBackend.whenGET(baseUrl + '/ddd/details').respond(mockDetails)
 
   )
 
@@ -85,7 +85,7 @@ describe 'Services', ->
         expect(apiFactory.getPricing()).toBeDefined()
 
       it 'can fetch the list of Plans from the API', ->
-        $httpBackend.expectGET(baseUrl + '/ddd/pricing')
+        $httpBackend.expectGET(baseUrl + '/ddd/prices')
 
         apiFactory.getPricing().then ((pricing) ->
           expect(pricing.length).toEqual 1
@@ -93,7 +93,7 @@ describe 'Services', ->
 
       it 'Error Status 500', ->
         result = undefined
-        $httpBackend.expectGET(baseUrl + '/ddd/pricing').respond 500
+        $httpBackend.expectGET(baseUrl + '/ddd/prices').respond 500
 
         apiFactory.getPricing().then ((pricing) ->
           expect(pricing.status).toEqual 500
